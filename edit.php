@@ -2,6 +2,14 @@
 // include database connection file
 include_once("config.php");
  
+//check sudah login / belom
+session_start();
+
+if($_SESSION['isLogin']==''){
+    header("Location: login.php");
+    echo "anda belum login";
+}
+
 // Check if form is submitted for user update, then redirect to homepage after update
 if(isset($_POST['update']))
 {	
@@ -77,7 +85,7 @@ while($user_data = mysqli_fetch_array($result))
             <div class="w-100 row pt-3">
 
                 <div class="w-50">
-                    <p>Password</p>
+                    <p>Password - isikan password lagi</p>
                     <input class="form-control" type="password" name="password">
                 </div>
 

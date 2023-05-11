@@ -2,6 +2,16 @@
 // Create database connection using config file
 include_once("config.php");
  
+session_start();
+
+if($_SESSION['isLogin']==''){
+    header("Location: login.php");
+    echo "anda belum login";
+}else{
+    echo "Welcome, Admin";
+}
+
+
 // Fetch all users data from database
 $result = mysqli_query($mysqli, "SELECT * FROM users ORDER BY id ASC");
 ?>
@@ -35,7 +45,7 @@ $result = mysqli_query($mysqli, "SELECT * FROM users ORDER BY id ASC");
             <tr>
                 <td class="ps-3"><?= $user_data['id'] ?></td>
                 <td><?= $user_data['name'] ?></td>
-                <td><img class="pt-3 pb-3"src="gambar/<?=$user_data['gambar']?>" width="100"></td>
+                <td><img class="pt-3 pb-3" src="gambar/<?=$user_data['gambar']?>" width="100"></td>
                 <td><?= $user_data['mobile'] ?></td>
                 <td><?= $user_data['email'] ?></td>
                 <td><?= $user_data['role'] ?></td>
@@ -51,5 +61,7 @@ $result = mysqli_query($mysqli, "SELECT * FROM users ORDER BY id ASC");
     <br>
     <a class="btn btn-primary btn-sm ms-3" href="add.php">Add New User</a><br /><br />
 </body>
+
+<a class="btn btn-primary btn-sm ms-3" href="logout.php" class="btn">Logout</a>
 
 </html>
